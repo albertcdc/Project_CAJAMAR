@@ -1,68 +1,68 @@
-Resumen i resultados obtenidos.
-En este trabajo se han utilizado dos mÈtodos y algoritmos para predecir el siguiente producto a contratar por un cliente de un banco a partir del dataset proporcionado, el primer modelo Ès el m·s simple y el segundo m·s complejo. Finalmente se ha utilizado el m·s complejo para generar el dataset de entrega.
-Primero se ha intentado un modelo simple, basado en los ˙ltimos dos producto contratados por cada usuario y en una clasificaciÛn previa de usuarios. El siguiente producto a contratar se ha calculado con la fÛrmula de probabilidades de Bayes con un porcentaje de aciertos del 27%.
+Resumen i resultados obtenidos..
+En este trabajo se han utilizado dos m√©todos y algoritmos para predecir el siguiente producto a contratar por un cliente de un banco a partir del dataset proporcionado, el primer modelo √©s el m√°s simple y el segundo m√°s complejo. Finalmente se ha utilizado el m√°s complejo para generar el dataset de entrega.
+Primero se ha intentado un modelo simple, basado en los √∫ltimos dos producto contratados por cada usuario y en una clasificaci√≥n previa de usuarios. El siguiente producto a contratar se ha calculado con la f√≥rmula de probabilidades de Bayes con un porcentaje de aciertos del 27%.
 
-El segundo modelo que se ha desarrollado se ha basado en mÈtodos de Machine Learning(ML). Se ha hecho un pretratado de los datos, y se han clasificado los usuarios en 2 grupos seg˙n su actividad (20% de clientes m·s activos i 80% de clientes m·s pasivos). Posteriormente se han extraÌdo nuevas caracterÌsticas de los datos. Finalmente, se han aplicado 2 modelos de ML se sklearn: RandomForestClassifier y GradientBoostingClassifier. Previamente se han optimizado los parametros de estos modelos mediante GridSearchCV.
+El segundo modelo que se ha desarrollado se ha basado en m√©todos de Machine Learning(ML). Se ha hecho un pretratado de los datos, y se han clasificado los usuarios en 2 grupos seg√∫n su actividad (20% de clientes m√°s activos i 80% de clientes m√°s pasivos). Posteriormente se han extra√≠do nuevas caracter√≠sticas de los datos. Finalmente, se han aplicado 2 modelos de ML se sklearn: RandomForestClassifier y GradientBoostingClassifier. Previamente se han optimizado los parametros de estos modelos mediante GridSearchCV.
 El modelo que ha dado mejor resultado ha sido un RandomForestClassifier, (el metodo GradientBoostingClassifier, da mejor resultado pero es mucho caro computacionalmente) con los parametros:
 {'n_estimators': 90, 'criterion': 'gini'} i 60000 muestras para el 20% de clientes activos.
 {'n_estimators': 40, 'criterion': 'gini'} i 100000 muestras para el 20% de clientes activos.
 Para calcular la bondad del modelo, se ha reservado un 20% de los datos provenientes del archivo train2.txt, para los 2 grupos de clientes creados.
 Se han calculado los errores de 2 formas distintas, siempre sobre un dataset de 'test', totalmente alieno al proceso de entrenamiento:
 - 'accuracy' sobre todos los productos:
-    20% m·s activo: 43,5%
+    20% m√°s activo: 43,5%
     80% menos activo: 53,0%
-- 'accuracy' sin tener en cuenta el 10% de productos m·s comprados, para poder ver si el error se distribuye de manera uniforme para todos los productos:
-    20% m·s activo: 30,2%
+- 'accuracy' sin tener en cuenta el 10% de productos m√°s comprados, para poder ver si el error se distribuye de manera uniforme para todos los productos:
+    20% m√°s activo: 30,2%
     80% menos activo: 15,3%
-ESTOS RESULTADOS PUEDEN SER NOTABLEMENTE MEJORADOS SI SE INCORPORAN M¡S MUESTRAS I SE AUGMENTA LA COMPLEJIDAD DEL MODELO, AUNQUE EL TIEMPO DE COMPUTACI”N VA A AUGMENTAR SIGNIFICATIVAMENTE.
-De este modo, so obtiene un modelo especializado en predecir qual va a ser el siguiente producto que van a comprar aquellos clientes que son m·s propensos a adquirir productos financieros, y que con notable seguridad, van a seguir adquiriÈndolos. Tiene sentido focalizar el trabajo en estos clientes, ya que son los que generan mas negocio para la entidad bancaria.
-Por otro lado, el 80% de clientes pasivos son m·s difÌciles de predecir, puesto que hay poca informaciÛn de ellos, tienen tendencia a comprar los productos mas comunes, e incluso en algunas ocasiones solo han comprado un solo producto.
+ESTOS RESULTADOS PUEDEN SER NOTABLEMENTE MEJORADOS SI SE INCORPORAN M√ÅS MUESTRAS I SE AUGMENTA LA COMPLEJIDAD DEL MODELO, AUNQUE EL TIEMPO DE COMPUTACI√ìN VA A AUGMENTAR SIGNIFICATIVAMENTE.
+De este modo, so obtiene un modelo especializado en predecir qual va a ser el siguiente producto que van a comprar aquellos clientes que son m√°s propensos a adquirir productos financieros, y que con notable seguridad, van a seguir adquiri√©ndolos. Tiene sentido focalizar el trabajo en estos clientes, ya que son los que generan mas negocio para la entidad bancaria.
+Por otro lado, el 80% de clientes pasivos son m√°s dif√≠ciles de predecir, puesto que hay poca informaci√≥n de ellos, tienen tendencia a comprar los productos mas comunes, e incluso en algunas ocasiones solo han comprado un solo producto.
 
-An·lisis exploratorio de los datos y comprensiÛn de negocio:
-DespuÈs de explorar los datos proporcionados por la entidad, se observa que hay unos pocos productos que sÛn muy comunes, mientras que otros son comprados en muy pocas ocasiones. Por otro lado, se ve que hay unos clientes que sÛn muy activos, algunos han adquirido m·s de 20 productos, mientras que una gran mayorÌa de los clientes no compran m·s de 5 productos durante toda su relaciÛn con el banco.
-Debido a estos perfiles de clientes tan diferenciados, los bancos suelen clasificar a los clientes y los distinguen entre clientes activos y pasivos. Estas dos categorÌas responden a comportamientos y patrones de conducta distintos. Unos son consumidores que no desean contratar productos, que prefieren ahorrar y huyen de ofertas que no pueden entender del todo. Por otro lado hay clientes com menos aversiÛn por el riesgo que no tienen miedo en hacer inversiones contratando diversos productos financieros.
-Conviene resaltar, que para evitar discriminaciones, el criterio de un banco para segmentar a sus clientes no puede basarse en razones de gÈnero, por lo que la variable que indica el gÈnero del cliente debe ser descartada.
-Se asume que el negocio de una entidad bancaria depende del n˙mero de productos contratados por los clientes. Acorde con el PRINCIPIO DE PARETO, tambiÈn conocido como la regla del 80-20, por la que una poblaciÛn se puede separar en dos grupos de proporciones 80-20 tales que el grupo minoritario, formado por un 20% de poblaciÛn, genera el 80 % del beneficio y que el grupo mayoritario, formado por un 80% de poblaciÛn, el 20% de negocio restante. 
-Se asume que el 20% de usuarios que generan m·s negocio son aquellos que compran m·s productos, y que por lo tanto es probable que sigan comport·ndose asÌ, por lo que se considera interesante segmentar a los clientes entre el 20% de usuarios m·s activos i el 80% de usuarios m·s pasivos. LA FRONTERA ENTRE AMBOS GRUPOS SE SITUA EN LOS 7 PRODUCTOS ADQUIRIDOS.
-Por otro lado, tambiÈn podemos hacer otra subclasificaciÛn dentro de los clientes de un banco. El nivel de ingresos de un usuario puede determinar con cierta probabilidad los productos que va a contratar. AsÌ un cliente con ingresos altos y perfil activo va a estar abierto a muchos productos diferentes, mientras que un cliente pasivo con un nivel econÛmico medio o bajo pr·cticamente no va a realizar actividad con la entidad y los productos a contratar van a ser los m·s comunes. TambiÈn puede ser determinante la edad del cliente, puesto que a medida que va augmentando la edad, tambiÈn lo hace la aversiÛn al riesgo. Este tipo de segmentaciÛn, sÛlo se ha considerado para el modelo m·s simple, basado en Probabilidad Bayesiana.
+An√°lisis exploratorio de los datos y comprensi√≥n de negocio:
+Despu√©s de explorar los datos proporcionados por la entidad, se observa que hay unos pocos productos que s√≥n muy comunes, mientras que otros son comprados en muy pocas ocasiones. Por otro lado, se ve que hay unos clientes que s√≥n muy activos, algunos han adquirido m√°s de 20 productos, mientras que una gran mayor√≠a de los clientes no compran m√°s de 5 productos durante toda su relaci√≥n con el banco.
+Debido a estos perfiles de clientes tan diferenciados, los bancos suelen clasificar a los clientes y los distinguen entre clientes activos y pasivos. Estas dos categor√≠as responden a comportamientos y patrones de conducta distintos. Unos son consumidores que no desean contratar productos, que prefieren ahorrar y huyen de ofertas que no pueden entender del todo. Por otro lado hay clientes com menos aversi√≥n por el riesgo que no tienen miedo en hacer inversiones contratando diversos productos financieros.
+Conviene resaltar, que para evitar discriminaciones, el criterio de un banco para segmentar a sus clientes no puede basarse en razones de g√©nero, por lo que la variable que indica el g√©nero del cliente debe ser descartada.
+Se asume que el negocio de una entidad bancaria depende del n√∫mero de productos contratados por los clientes. Acorde con el PRINCIPIO DE PARETO, tambi√©n conocido como la regla del 80-20, por la que una poblaci√≥n se puede separar en dos grupos de proporciones 80-20 tales que el grupo minoritario, formado por un 20% de poblaci√≥n, genera el 80 % del beneficio y que el grupo mayoritario, formado por un 80% de poblaci√≥n, el 20% de negocio restante. 
+Se asume que el 20% de usuarios que generan m√°s negocio son aquellos que compran m√°s productos, y que por lo tanto es probable que sigan comport√°ndose as√≠, por lo que se considera interesante segmentar a los clientes entre el 20% de usuarios m√°s activos i el 80% de usuarios m√°s pasivos. LA FRONTERA ENTRE AMBOS GRUPOS SE SITUA EN LOS 7 PRODUCTOS ADQUIRIDOS.
+Por otro lado, tambi√©n podemos hacer otra subclasificaci√≥n dentro de los clientes de un banco. El nivel de ingresos de un usuario puede determinar con cierta probabilidad los productos que va a contratar. As√≠ un cliente con ingresos altos y perfil activo va a estar abierto a muchos productos diferentes, mientras que un cliente pasivo con un nivel econ√≥mico medio o bajo pr√°cticamente no va a realizar actividad con la entidad y los productos a contratar van a ser los m√°s comunes. Tambi√©n puede ser determinante la edad del cliente, puesto que a medida que va augmentando la edad, tambi√©n lo hace la aversi√≥n al riesgo. Este tipo de segmentaci√≥n, s√≥lo se ha considerado para el modelo m√°s simple, basado en Probabilidad Bayesiana.
 
-ManipulaciÛn de variables y su argumentaciÛn: eliminaciÛn, transformaciÛn y/o creaciÛn de nuevas variables:
-CÛmo se comenta en el apartado de comprensiÛn del negocio, se ELIMINA la variable que indica el gÈnero del cliente, ya que para evitar discriminaciones, el criterio de un banco para segmentar a sus clientes no puede basarse en razones de gÈnero.
-Se considera tener en cuenta el PRINCIPIO DE PARETO (REGLA 80-20) para la segmentaciÛn de los clientes en 2 grupos: el 20% de clientes m·s activos i el 80% de clientes m·s pasivos. Asumiendo que es este 20% de clientes que compran m·s productos, quien genera mayores beneficios para la entidad financiera, y que es el grupo de clientes que con mayor probabilidad va a comprar otro producto,se desarrolla un modelo focalizado en ellos.
-Para conservar la informaciÛn de quÈ productos ha comprado cada cliente y en quÈ orden los ha comprado, se CREA/EXTRAE un nuevo vector de caracterÌsticas del dataset. Este conjunto de caracterÌsticas consiste en un vector de longitud 94, puesto que hay 94 productos distintos y cada elemento del vector representa un producto.
+Manipulaci√≥n de variables y su argumentaci√≥n: eliminaci√≥n, transformaci√≥n y/o creaci√≥n de nuevas variables:
+C√≥mo se comenta en el apartado de comprensi√≥n del negocio, se ELIMINA la variable que indica el g√©nero del cliente, ya que para evitar discriminaciones, el criterio de un banco para segmentar a sus clientes no puede basarse en razones de g√©nero.
+Se considera tener en cuenta el PRINCIPIO DE PARETO (REGLA 80-20) para la segmentaci√≥n de los clientes en 2 grupos: el 20% de clientes m√°s activos i el 80% de clientes m√°s pasivos. Asumiendo que es este 20% de clientes que compran m√°s productos, quien genera mayores beneficios para la entidad financiera, y que es el grupo de clientes que con mayor probabilidad va a comprar otro producto,se desarrolla un modelo focalizado en ellos.
+Para conservar la informaci√≥n de qu√© productos ha comprado cada cliente y en qu√© orden los ha comprado, se CREA/EXTRAE un nuevo vector de caracter√≠sticas del dataset. Este conjunto de caracter√≠sticas consiste en un vector de longitud 94, puesto que hay 94 productos distintos y cada elemento del vector representa un producto.
 EL valor de cada elemento del vector se obtiene de la siguiente forma:
     - 0: si el producto representado por el elemento no ha sido comprado por el cliente
     - 1/orden_inverso_de_compra si ha sido comprado.
     # EJEMPLO:
     Suponiendo que hay 5 productos posibles: A, B, C, D, E, F.
-    El Cliente1 ha comprado, por este orden, los productos: A(aÒo 2010),C(aÒo 2011),F(aÒo 2012).
-    Por lo tanto el orden_inverso_de_compra sera: 3(prod A, m·s antiguo), 2 (prod B) i 1(prod C, m·s reciente).
+    El Cliente1 ha comprado, por este orden, los productos: A(a√±o 2010),C(a√±o 2011),F(a√±o 2012).
+    Por lo tanto el orden_inverso_de_compra sera: 3(prod A, m√°s antiguo), 2 (prod B) i 1(prod C, m√°s reciente).
     Esta NUEVA VARIABLE tiene un elemento para cada producto, por lo tanto tiene 6 campos (94 campos para el caso real de Cajamar).
-    ENTONCES ESTA NUEVA VARIABLE SER¡:
+    ENTONCES ESTA NUEVA VARIABLE SER√Å:
                        A   B   C   D   E   F
     nueva_variable = [1/3, 0, 1/2, 0,  0, 1/1]
-    Ya que F es el ˙ltimo producto comprado, tendr· un valor mayor que C, el segundo producto m·s reciente y a˙n mayor que A, que es producto m·s antiguo.
+    Ya que F es el √∫ltimo producto comprado, tendr√° un valor mayor que C, el segundo producto m√°s reciente y a√∫n mayor que A, que es producto m√°s antiguo.
     ****
-DE ESTA FORMA, SE CONDENSA LA INFORMATION SOBRE QU… PRODUCTOS Y EN QU… ORDEN HA SIDO ADQUIRIDO PARA CADA USUARIO.
+DE ESTA FORMA, SE CONDENSA LA INFORMATION SOBRE QU√â PRODUCTOS Y EN QU√â ORDEN HA SIDO ADQUIRIDO PARA CADA USUARIO.
     ****
-A esta nueva_variable creada, se le uniran la variables existentes que informan sobre la edad, antig¸edad, ingresos y ocupaciÛn.
+A esta nueva_variable creada, se le uniran la variables existentes que informan sobre la edad, antig√ºedad, ingresos y ocupaci√≥n.
 
-SelecciÛn de modelo/s y ajuste de par·metros
-Se han utilizado 2 mÈtodos:
-- Probabilidad Bayesiana: Utiliza sÛlo los dos ˙ltimos productos comprados para cada cliente. Es el modelo m·s sencillo, utilizado como punto de partida para corroborar que el siguiente mÈtodo utilizado aporta valor a la predicciÛn, o no lo aporta.
-- Clasificadores (Supervised ML, sklearn): Se han desarrollado modelos utilizando los mÈtodos RandomForestClassifier y GradientBoostingClassifier.
-Para optimizar los par·metros de estos clasificadores, se ha utilizado la funciÛn GridSearchCV de sklearn, que permite comparar diversas configuraciones de par·metros y quedarse con aquella que da mejor resultado.
-Se observa que a m·s muestras, los modelos dan mejor resultado y requieren mas complejidad (augmentar el parametro "n_estimators", por ejemplo), lo que a su vez hace augmentar el tiempo de computaciÛn significativamente.
-RESULTADOS OBTENIDOS: un 43,5% de accuracy sobre todos los datos para los clientes m·s activos, un 30,2% si se excluyen aquellos que van a comprar un producto dentro de los 10% m·s comprados. El accuracy sobre los clientes pasivos es del 53,0%.
+Selecci√≥n de modelo/s y ajuste de par√°metros
+Se han utilizado 2 m√©todos:
+- Probabilidad Bayesiana: Utiliza s√≥lo los dos √∫ltimos productos comprados para cada cliente. Es el modelo m√°s sencillo, utilizado como punto de partida para corroborar que el siguiente m√©todo utilizado aporta valor a la predicci√≥n, o no lo aporta.
+- Clasificadores (Supervised ML, sklearn): Se han desarrollado modelos utilizando los m√©todos RandomForestClassifier y GradientBoostingClassifier.
+Para optimizar los par√°metros de estos clasificadores, se ha utilizado la funci√≥n GridSearchCV de sklearn, que permite comparar diversas configuraciones de par√°metros y quedarse con aquella que da mejor resultado.
+Se observa que a m√°s muestras, los modelos dan mejor resultado y requieren mas complejidad (augmentar el parametro "n_estimators", por ejemplo), lo que a su vez hace augmentar el tiempo de computaci√≥n significativamente.
+RESULTADOS OBTENIDOS: un 43,5% de accuracy sobre todos los datos para los clientes m√°s activos, un 30,2% si se excluyen aquellos que van a comprar un producto dentro de los 10% m√°s comprados. El accuracy sobre los clientes pasivos es del 53,0%.
 
-ElecciÛn de mÈtrica elegida y justificaciÛn. Bondad del modelo
-Debido a que hay un grupo de pocos productos que son muy comunes, y luego est· todo el resto de productos que son comprados con menos frecuencia, se ha considerado interesante medir la bondad del modelo aplic·ndolo sÛlo a aquellos clientes que no iban a comprar ninguno de los productos dentro del 10% de productos m·s comunes. Es decir, se ha calculado la bondad del modelo para aquellos casos m·s difÌciles de predecir.
-Esto permite poder ver si el error se distribuye de manera uniforme para todos los productos, y no se concentra sÛlo en aquellos productos menos frecuentes.
+Elecci√≥n de m√©trica elegida y justificaci√≥n. Bondad del modelo
+Debido a que hay un grupo de pocos productos que son muy comunes, y luego est√° todo el resto de productos que son comprados con menos frecuencia, se ha considerado interesante medir la bondad del modelo aplic√°ndolo s√≥lo a aquellos clientes que no iban a comprar ninguno de los productos dentro del 10% de productos m√°s comunes. Es decir, se ha calculado la bondad del modelo para aquellos casos m√°s dif√≠ciles de predecir.
+Esto permite poder ver si el error se distribuye de manera uniforme para todos los productos, y no se concentra s√≥lo en aquellos productos menos frecuentes.
 
-Interpretabilidad del modelo y viabilidad de puesta en producciÛn
-Cada una de las variables utilizadas, tanto las propias del dataset inicial, como las creadas en este proyecto, tiene su significado y su lÛgica interpretaciÛn, como se ha explicado en el apartado de "ManipulaciÛn de variables...".
-Puesto que se han segmentado los clientes en 2 grupos (20% m·s activo y 80% m·s pasivo), se han obtenido 2 modelos distintos.
-Para la puesta en producciÛn, simplemente hace falta clasificar cada cliente en uno de los dos segmentos:
-   -  7 o m·s productos comprados: grupo del 20%
+Interpretabilidad del modelo y viabilidad de puesta en producci√≥n
+Cada una de las variables utilizadas, tanto las propias del dataset inicial, como las creadas en este proyecto, tiene su significado y su l√≥gica interpretaci√≥n, como se ha explicado en el apartado de "Manipulaci√≥n de variables...".
+Puesto que se han segmentado los clientes en 2 grupos (20% m√°s activo y 80% m√°s pasivo), se han obtenido 2 modelos distintos.
+Para la puesta en producci√≥n, simplemente hace falta clasificar cada cliente en uno de los dos segmentos:
+   -  7 o m√°s productos comprados: grupo del 20%
     - menos de 7 productos comprados: al grupo del 80%
-Una vez un cliente est· clasificado, solo hace falta crear el vector de variables para ese cliente y ejecutar sobre este vector de variables el modelo correspondiente a su segmento.
+Una vez un cliente est√° clasificado, solo hace falta crear el vector de variables para ese cliente y ejecutar sobre este vector de variables el modelo correspondiente a su segmento.
